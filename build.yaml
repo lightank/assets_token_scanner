@@ -1,0 +1,23 @@
+targets:
+  $default:
+    builders:
+      assets_token_scanner:
+        enabled: true
+        options:
+          assets_dir: assets
+          output_file: lib/token.dart
+
+builders:
+  # name of the builder
+  assets_token_scanner:
+    # library URI containing the builder - maps to `lib/builder.dart`
+    import: "package:assets_token_scanner/assets_token_scanner.dart"
+    # Name of the function in the above library to call.
+    builder_factories: ["assetScannerBuilder"]
+    # The mapping from the source extension to the generated file extension
+    build_extensions: {r'$lib$': ["token.dart"]}
+    # Will automatically run on any package that depends on it
+    auto_apply: dependents
+    # Generate the output directly into the package, not to a hidden cache dir
+    build_to: source
+    # applies_builders: ["source_gen|combining_builder"]
